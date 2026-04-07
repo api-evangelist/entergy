@@ -1,7 +1,11 @@
 aid: entergy
-url: https://raw.githubusercontent.com/api-evangelist/entergy/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/entergy/refs/heads/main/apis.yml
 modified: '2026-03-21'
 apis: []
 common:
   - type: Website
     url: https://www.entergy.com
+description: >-
+  We are an integrated energy company that provides electricity to more than 3 million
+  utility customers in Arkansas, Louisiana, Mississippi and Texas.
