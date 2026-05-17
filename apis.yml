@@ -9,7 +9,7 @@ description: >-
   developer API portal, it operates customer-facing digital tools (myEntergy
   account portal, outage map, energy efficiency toolkit) that interact with
   internal systems via private APIs.
-type: Profile
+kind: profile
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Electricity
