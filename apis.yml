@@ -24,6 +24,8 @@ access: 3rd-Party
 specificationVersion: '0.19'
 apis: []
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/entergy
   - type: Website
     url: https://www.entergy.com
   - type: CustomerPortal
