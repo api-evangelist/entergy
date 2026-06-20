@@ -10,7 +10,7 @@ description: >-
   account portal, outage map, energy efficiency toolkit) that interact with
   internal systems via private APIs.
 kind: profile
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Electricity
   - Energy
