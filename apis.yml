@@ -24,6 +24,8 @@ access: 3rd-Party
 specificationVersion: '0.19'
 apis: []
 common:
+  - type: DomainSecurity
+    url: security/entergy-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/entergy
   - type: Website
@@ -34,6 +36,8 @@ common:
     url: https://www.entergy.com/outages/
   - type: Careers
     url: https://www.entergy.com/careers/
+  - url: https://www.entergy.com/feed/
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
