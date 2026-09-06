@@ -1,0 +1,23 @@
+generated: '2026-09-06'
+method: searched
+source: >-
+  registry.npmjs.org search, pypi.org, rubygems.org, crates.io, and a search of Entergy's own
+  site and GitHub for a first-party client library.
+name: Entergy client packages
+package_count: 0
+packages: []
+note: >-
+  Entergy publishes no SDK, no client library and no package on any registry, which follows
+  from having no developer program. The npm registry search for "entergy" returns zero
+  packages; pypi.org/pypi/entergy/json and rubygems.org/api/v1/gems/entergy both return 404.
+  No Entergy GitHub organization was found. Third-party scrapers of the outage map exist on
+  GitHub (for example patricktrainer/entergy-outages) but they are not first-party and are not
+  listed here. No SDKs pointer is emitted in apis.yml.
+evidence:
+  - url: https://registry.npmjs.org/-/v1/search?text=entergy&size=10
+    status: 200
+    finding: Zero results.
+  - url: https://pypi.org/pypi/entergy/json
+    status: 404
+  - url: https://rubygems.org/api/v1/gems/entergy.json
+    status: 404

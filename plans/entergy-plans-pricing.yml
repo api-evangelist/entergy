@@ -1,0 +1,20 @@
+generated: '2026-09-06'
+method: searched
+source: https://www.entergy.com/ and https://myentergyadvisor.entergy.com/greenbutton/welcome
+name: Entergy API plans and pricing
+plan_count: 0
+plans: []
+note: >-
+  Entergy sells electricity, not API access. There is no developer plan, no free tier, no
+  metered API pricing and no "contact sales" page for API access, because there is no API
+  product. The nearest thing to commercial onboarding is Green Button Connect service-provider
+  registration, which is a free regulatory data-sharing program for Entergy Texas customers'
+  chosen third parties, not a priced API tier. Entergy's published rate schedules price
+  kilowatt-hours and are out of scope for this record.
+evidence:
+  - url: https://myentergyadvisor.entergy.com/greenbutton/welcome
+    status: 200
+    finding: Green Button service-provider program, no pricing of any kind.
+  - url: https://www.entergy.com/wp-json/
+    status: 200
+    finding: The one anonymous API surface is free and unpriced because it is the CMS's own REST API.

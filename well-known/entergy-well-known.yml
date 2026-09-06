@@ -1,0 +1,152 @@
+generated: '2026-09-06'
+method: probed
+source: >-
+  Direct HTTP probes of every host this record knows: the registrable domain and www, the
+  GIS host discovered in DNS, the Green Button service-provider portal host, and the
+  Salesforce-hosted customer community.
+name: Entergy well-known discovery probe
+note: >-
+  NOTHING WAS FOUND. No host Entergy controls serves a security.txt, an api-catalog, an
+  OpenID/OAuth discovery document, an ai-plugin manifest or an A2A agent card. No WellKnown
+  or SecurityTxt pointer is emitted in apis.yml, because this file records an absence and a
+  pointer would assert a presence. The 200s on myentergyadvisor.entergy.com are FALSE
+  POSITIVES: that host 302s every path to the Salesforce Experience Cloud login SPA at
+  www.myentergy.com/s/login/, which answers 200 with an HTML page titled "Login Template
+  Title" for /.well-known/security.txt, /.well-known/agent-card.json and /llms.txt alike.
+  The one document that IS served on an Entergy host is the ArcGIS Server REST info
+  document, saved here as entergy-arcgis-rest-info.json; it is not a /.well-known/ path, so
+  it is recorded below under its real path rather than credited as one.
+hosts:
+  - host: www.entergy.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+      - path: /llms.txt
+        status: 404
+        file: null
+      - path: /wp-json/
+        status: 200
+        file: ../openapi/_original/entergy-wordpress-rest-index.json
+        note: >-
+          Not a /.well-known/ path, but the site's real machine-readable discovery document -
+          a WordPress REST route index naming 9 namespaces and 173 routes, linked from every
+          page as rel="https://api.w.org/". Saved verbatim and used to derive
+          openapi/entergy-wordpress-rest-openapi.yml.
+  - host: entergy.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+      - path: /llms.txt
+        status: 404
+        file: null
+  - host: gis.entergy.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+      - path: /llms.txt
+        status: 404
+        file: null
+      - path: /arcgis/rest/info?f=json
+        status: 200
+        file: entergy-arcgis-rest-info.json
+        note: >-
+          Anonymous ArcGIS Server 10.7.1 service-info document. Declares token-based security
+          with a token service at https://gis.entergy.com/arcgis/tokens/ and a SOAP catalog at
+          https://gis.entergy.com/arcgis/services. Not a /.well-known/ document.
+  - host: myentergyadvisor.entergy.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: null
+        note: FALSE POSITIVE - redirects to the Salesforce login SPA, HTML body, not a document.
+      - path: /.well-known/api-catalog
+        status: 200
+        file: null
+        note: FALSE POSITIVE - Salesforce login SPA shell.
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: null
+        note: FALSE POSITIVE - Salesforce login SPA shell.
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: null
+        note: FALSE POSITIVE - Salesforce login SPA shell.
+      - path: /.well-known/agent-card.json
+        status: 200
+        file: null
+        note: FALSE POSITIVE - Salesforce login SPA shell, not a JSON AgentCard.
+      - path: /.well-known/agent.json
+        status: 200
+        file: null
+        note: FALSE POSITIVE - Salesforce login SPA shell, not a JSON AgentCard.
+      - path: /llms.txt
+        status: 200
+        file: null
+        note: FALSE POSITIVE - Salesforce login SPA shell.
+      - path: /greenbutton/welcome
+        status: 200
+        file: null
+        note: >-
+          Real page - Entergy Texas Green Button Connect My Data service-provider landing page.
+      - path: /greenbutton/green-vendor
+        status: 200
+        file: null
+        note: Real page - "Green Button Connect Vendor Registration" form. The ESPI API itself is behind it.
+  - host: www.etrviewoutage.com
+    documents:
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+        note: >-
+          Host serves Entergy's public outage map, but the application is DataCapable's
+          ("DataCapable | Event Map", bundle app.*.entergy-10.2.1.0.bundle.js). Any data API
+          behind it belongs to DataCapable, not to Entergy, so nothing here is attributed to
+          Entergy under the STEP 0c ownership rule.

@@ -1,0 +1,58 @@
+generated: '2026-09-06'
+method: probed
+source: >-
+  Live responses observed on https://www.entergy.com/wp-json/ routes, 2026-09-06, plus the
+  4xx responses in openapi/entergy-wordpress-rest-openapi.yml.
+name: Entergy error catalog
+format: vendor-specific
+rfc9457: false
+envelope:
+  content_type: application/json
+  shape: '{ "code": "<machine slug>", "message": "<human sentence>", "data": { "status": <http status> } }'
+  note: >-
+    WordPress's own error envelope, not RFC 9457 problem+json. There is no `type` URI, no
+    `instance`, and no problem-type registry - the `code` slug is the only machine-readable
+    discriminator. Entergy publishes no error reference page of its own, so every entry below
+    was captured from a real response on their host rather than read from documentation.
+errors:
+  - code: rest_no_route
+    status: 404
+    title: No route matched
+    detail: No route was found matching the URL and request method.
+    remediation: >-
+      Check the path and the HTTP method against the live route index at
+      https://www.entergy.com/wp-json/. A method mismatch on a valid path also produces this.
+    observed_at: https://www.entergy.com/wp-json/wp/v2/nonexistent-route-check
+  - code: rest_forbidden
+    status: 401
+    title: Not permitted
+    detail: Sorry, you are not allowed to do that.
+    remediation: >-
+      The route requires a WordPress Application Password or a cookie plus X-WP-Nonce.
+      Entergy does not issue credentials to third parties, so for an outside caller this is a
+      terminal error, not a retryable one.
+    observed_at: https://www.entergy.com/wp-json/wp/v2/settings
+  - code: rest_cannot_access
+    status: 401
+    title: Endpoint requires authentication
+    detail: Only authenticated users can access the User endpoint REST API.
+    remediation: Authenticate, or use a public read route instead. Not retryable anonymously.
+    observed_at: https://www.entergy.com/wp-json/wp/v2/users
+  - code: rest_post_invalid_id
+    status: 404
+    title: Invalid object id
+    detail: Invalid post ID.
+    remediation: >-
+      The id does not exist or is not readable anonymously. Resolve ids from a collection
+      route (GET /wp/v2/posts) rather than guessing them.
+    observed_at: https://www.entergy.com/wp-json/wp/v2/posts/1
+gaps:
+  - >-
+    Entergy publishes no error reference. This catalog is complete only for the codes we could
+    trigger anonymously; the credential-gated routes will return many more WordPress core codes
+    that cannot be enumerated without an account.
+  - >-
+    The ArcGIS surface uses a second, unrelated envelope: {"error":{"code":499,"message":"Token
+    Required","details":[]}} at HTTP 200. Note the status-code lie - an ArcGIS auth failure is
+    a 200 with an error body, so a client that branches on status alone will treat a refusal as
+    a success.

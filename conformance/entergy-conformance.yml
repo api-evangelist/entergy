@@ -1,0 +1,86 @@
+generated: '2026-09-06'
+method: probed
+source: >-
+  openapi/entergy-wordpress-rest-openapi.yml, wsdl/entergy-arcgis-catalog.wsdl,
+  well-known/entergy-arcgis-rest-info.json, and
+  https://myentergyadvisor.entergy.com/greenbutton/welcome (HTTP 200).
+name: Entergy standards conformance
+conformance:
+  - id: rfc9457
+    conforms: false
+    evidence: >-
+      The WordPress error envelope is {code,message,data.status} at application/json. No
+      problem+json media type and no type URI anywhere on the surface.
+  - id: pagination
+    conforms: true
+    evidence: >-
+      RFC 8288 Link rel="next" plus X-WP-Total / X-WP-TotalPages observed live on
+      https://www.entergy.com/wp-json/wp/v2/posts?per_page=1 (HTTP 200).
+  - id: idempotency
+    conforms: false
+    evidence: No Idempotency-Key mechanism on any route. See conventions/entergy-conventions.yml.
+  - id: oauth2
+    conforms: false
+    evidence: >-
+      No OAuth authorization server is published. /.well-known/oauth-authorization-server
+      returns 404 on every Entergy host. The Green Button program implies an ESPI OAuth flow
+      but Entergy publishes no endpoint for it.
+  - id: oidc
+    conforms: false
+    evidence: /.well-known/openid-configuration returns 404 on www.entergy.com and gis.entergy.com.
+  - id: soap-wsdl
+    conforms: true
+    evidence: >-
+      https://gis.entergy.com/arcgis/services?wsdl returns HTTP 200 with a WSDL 1.1 document
+      whose soap:address location is https://gis.entergy.com/arcgis/services and which declares
+      a Catalog service with 7 operations. Saved verbatim at wsdl/entergy-arcgis-catalog.wsdl.
+domain_standards:
+  - id: naesb-req21-espi
+    name: NAESB REQ.21 Energy Services Provider Interface (Green Button Connect My Data)
+    market: retail electric utility / customer energy usage data sharing
+    conforms: true
+    evidence: https://myentergyadvisor.entergy.com/greenbutton/welcome
+    evidence_status: 200
+    evidence_type: provider-published program page
+    detail: >-
+      Entergy Texas operates Green Button Connect My Data, the NAESB REQ.21 ESPI profile for
+      letting a customer authorize a third-party service provider to pull their advanced-meter
+      interval data in a common format. Entergy runs the program on its own host and takes
+      vendor registrations at /greenbutton/green-vendor (HTTP 200). This is the single
+      domain-standard commitment in the record, and for a utility it is the one that matters:
+      a service provider that already speaks ESPI integrates with no bespoke connector.
+    caveat: >-
+      GRADED HONESTLY: the CONTRACT was not observed. Entergy publishes no ESPI endpoint URL,
+      no authorization server, no scope list and no ESPI XML schema anonymously - all of it
+      sits behind the vendor registration form. Conformance is asserted from Entergy's own
+      program page naming the standard, not from a fetched ESPI contract, and no ESPI artifact
+      has been written to this repo.
+  - id: esri-arcgis-rest
+    name: Esri ArcGIS Server REST/SOAP service interface
+    market: geospatial / electric utility network GIS
+    conforms: true
+    evidence: https://gis.entergy.com/arcgis/rest/info?f=json
+    evidence_status: 200
+    detail: >-
+      ArcGIS Server 10.7.1 (currentVersion 10.71), token-based security, token service at
+      /arcgis/tokens/, SOAP catalog at /arcgis/services. A vendor interface rather than an open
+      standard, but it is a real, published, self-describing contract shape.
+not_applicable:
+  - id: fhir
+    reason: Not a healthcare provider.
+  - id: fapi
+    reason: Not a financial institution; no open-banking surface.
+  - id: psd2
+    reason: US electric utility, outside PSD2 scope.
+  - id: scim
+    reason: No identity-provisioning surface is published.
+  - id: odata
+    reason: No OData $metadata endpoint on any Entergy host.
+  - id: json-api
+    reason: Neither surface uses the application/vnd.api+json media type.
+  - id: ogc-api
+    reason: >-
+      Probed where the evidence pointed - gis.entergy.com resolves and serves ArcGIS - but
+      /conformance and /geoserver/ows both returned 404, and the ArcGIS service directory is
+      token-gated, so no OGC conformance class list could be fetched. Recorded as unproven, not
+      as absent, and NOTHING was generated.

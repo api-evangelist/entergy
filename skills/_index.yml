@@ -1,0 +1,22 @@
+generated: '2026-09-06'
+method: generated
+source: openapi/entergy-wordpress-rest-openapi.yml
+name: Entergy agent skills
+skills:
+  - file: entergy-read-newsroom-content.md
+    name: entergy-read-newsroom-content
+    api: entergy-wordpress-rest
+    summary: >-
+      Read Entergy's published news and corporate content from the public WordPress REST API
+      with correct pagination, correct error handling, and an explicit map of the four data
+      surfaces that are NOT reachable this way.
+    operations:
+      - get_wp_v2_posts
+      - get_wp_v2_posts_id
+      - get_wp_v2_categories
+      - get_wp_v2_search
+note: >-
+  Only one skill is packaged, and deliberately so. Skills are grounded in real operationIds
+  from openapi/entergy-wordpress-rest-openapi.yml; the only operations an outside agent can
+  actually invoke on Entergy are the anonymous WordPress read routes. Writing skills for the
+  credential-gated routes would be writing instructions nobody can follow.

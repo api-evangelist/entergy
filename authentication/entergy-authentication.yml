@@ -1,0 +1,79 @@
+generated: '2026-09-06'
+method: probed
+source: >-
+  https://www.entergy.com/wp-json/ (route index, HTTP 200) plus
+  https://gis.entergy.com/arcgis/rest/info?f=json (HTTP 200) and a live SOAP RequiresTokens
+  call against https://gis.entergy.com/arcgis/services (HTTP 200, Result 1).
+name: Entergy authentication profile
+summary: >-
+  Entergy runs no developer identity platform. The two machine-readable surfaces it serves
+  each carry their own vendor-native auth model, and neither issues developer credentials
+  through a self-service portal.
+schemes:
+  - id: wordpress-application-password
+    api: entergy-wordpress-rest
+    type: http
+    scheme: basic
+    name: WordPress Application Passwords
+    description: >-
+      The route index at https://www.entergy.com/wp-json/ advertises
+      authentication.application-passwords.endpoints.authorization =
+      https://www.entergy.com/wp-admin/authorize-application.php. This is WordPress core
+      behaviour, available only to accounts that already exist in Entergy's CMS - there is no
+      public registration. Anonymous callers get the public read routes; everything else
+      returns the rest_forbidden envelope with HTTP 401.
+    public_registration: false
+    anonymous_read: true
+    evidence: https://www.entergy.com/wp-json/
+    evidence_status: 200
+  - id: wordpress-cookie-nonce
+    api: entergy-wordpress-rest
+    type: apiKey
+    in: header
+    key_name: X-WP-Nonce
+    name: WordPress cookie authentication with nonce
+    description: >-
+      Observed in the live Access-Control-Allow-Headers on a wp-json response
+      (Authorization, X-WP-Nonce, Content-Disposition, Content-MD5, Content-Type). This is the
+      first-party browser path used by entergy.com's own front end, not an integration path.
+    evidence: https://www.entergy.com/wp-json/wp/v2/posts?per_page=1
+    evidence_status: 200
+  - id: arcgis-token
+    api: entergy-arcgis
+    type: apiKey
+    in: query
+    key_name: token
+    name: ArcGIS Server short-lived token
+    description: >-
+      https://gis.entergy.com/arcgis/rest/info?f=json reports
+      authInfo.isTokenBasedSecurity = true, tokenServicesUrl =
+      https://gis.entergy.com/arcgis/tokens/ and shortLivedTokenValidity = 60 minutes. The
+      SOAP catalog confirms it independently: RequiresTokens returns Result 1. The service
+      directory itself (/arcgis/rest/services) answers HTTP 200 with
+      {"error":{"code":499,"message":"Token Required"}} - the API is real and reachable, the
+      data is not public. Tokens are issued to Entergy accounts; there is no public request path.
+    public_registration: false
+    anonymous_read: false
+    evidence: https://gis.entergy.com/arcgis/rest/info?f=json
+    evidence_status: 200
+  - id: green-button-espi
+    api: entergy-green-button
+    type: oauth2
+    name: NAESB REQ.21 ESPI (Green Button Connect My Data) authorization
+    description: >-
+      Entergy Texas operates Green Button Connect My Data, which by the NAESB REQ.21 ESPI
+      standard is an OAuth 2.0 authorization-code flow between a registered third-party
+      service provider and the utility Data Custodian. Entergy publishes the PROGRAM
+      (https://myentergyadvisor.entergy.com/greenbutton/welcome, HTTP 200) and a vendor
+      registration form (/greenbutton/green-vendor, HTTP 200) but publishes NO endpoint URLs,
+      NO scope list and NO client-registration document anonymously. The flow is asserted here
+      only as the standard's mandated shape; no Entergy-specific authorization, token or
+      resource URL is recorded, because none was served.
+    public_registration: false
+    gated_behind: vendor registration form
+    evidence: https://myentergyadvisor.entergy.com/greenbutton/green-vendor
+    evidence_status: 200
+not_found:
+  - No /.well-known/openid-configuration on any Entergy host (all 404).
+  - No /.well-known/oauth-authorization-server on any Entergy host (all 404).
+  - No developer portal, no API key issuance page, no client-credentials documentation.

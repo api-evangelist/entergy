@@ -38,13 +38,60 @@ tags:
   - Energy
   - Fortune 500
   - Utility
+  - Nuclear
+  - Power Generation
+  - Louisiana
+  - Geospatial
 url: https://raw.githubusercontent.com/api-evangelist/entergy/refs/heads/main/apis.yml
 created: '2026-03-21'
-modified: '2026-04-28'
+modified: '2026-09-06'
 position: Consuming
 access: 3rd-Party
 specificationVersion: '0.23'
-apis: []
+apis:
+  - name: Entergy WordPress REST API
+    description: >-
+      The public, anonymous, machine-readable REST API that entergy.com's own content
+      management system serves at https://www.entergy.com/wp-json/. It is the WordPress core
+      REST API (plus site plugins), advertised on every page as rel="https://api.w.org/", and
+      it exposes Entergy's published news, storm updates, corporate pages, media, categories
+      and site search. It is NOT an energy, outage or meter-data API, and Entergy publishes no
+      developer portal for it. Recorded here because it is the only callable, self-describing
+      contract on an Entergy host that answers without credentials, and because the route index
+      identifies its owner unambiguously: name "Entergy", url "https://www.entergy.com".
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/entergy.png
+    humanURL: https://www.entergy.com/wp-json/
+    baseURL: https://www.entergy.com/wp-json
+    tags:
+      - Content
+      - News
+      - WordPress
+    properties:
+      - type: OpenAPI
+        url: openapi/entergy-wordpress-rest-openapi.yml
+      - type: Overlay
+        url: overlays/entergy-wordpress-rest-overlay.yaml
+      - type: ToolCrosswalk
+        url: mcp/entergy-tool-crosswalk.yml
+  - name: Entergy ArcGIS Server
+    description: >-
+      Entergy's electric-network GIS platform at gis.entergy.com, running Esri ArcGIS Server
+      10.7.1. The service-info document answers anonymously and declares token-based security
+      with a token service at https://gis.entergy.com/arcgis/tokens/; the SOAP catalog at
+      https://gis.entergy.com/arcgis/services publishes a WSDL 1.1 contract with seven
+      operations whose soap:address points back at gis.entergy.com. The service directory
+      itself returns HTTP 200 carrying {"error":{"code":499,"message":"Token Required"}}, so the
+      API is real and reachable while the map services behind it are not public.
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/entergy.png
+    humanURL: https://gis.entergy.com/arcgis/rest/info?f=json
+    baseURL: https://gis.entergy.com/arcgis
+    tags:
+      - GIS
+      - Geospatial
+      - SOAP
+    properties:
+      - type: WSDL
+        url: wsdl/entergy-arcgis-catalog.wsdl
 common:
   - type: DomainSecurity
     url: security/entergy-domain-security.yml
@@ -53,13 +100,48 @@ common:
   - type: Website
     url: https://www.entergy.com
   - type: CustomerPortal
-    url: https://myaccount.entergy.com/
+    url: https://www.myentergy.com/s/login/
   - type: OutageMap
     url: https://www.entergy.com/outages/
   - type: Careers
     url: https://www.entergy.com/careers/
   - url: https://www.entergy.com/feed/
     type: Blog
+  - type: Authentication
+    url: authentication/entergy-authentication.yml
+  - type: Conventions
+    url: conventions/entergy-conventions.yml
+  - type: ErrorCatalog
+    url: errors/entergy-problem-types.yml
+  - type: Conformance
+    url: conformance/entergy-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/entergy-lifecycle.yml
+  - type: RateLimits
+    url: rate-limits/entergy-rate-limits.yml
+  - type: Plans
+    url: plans/entergy-plans-pricing.yml
+  - type: Packages
+    url: packages/entergy-packages.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: LLMsTxt
+    url: llms/entergy-llms.txt
+  - type: TermsOfService
+    url: https://www.entergy.com/terms
+  - type: PrivacyPolicy
+    url: https://www.entergy.com/privacy
+  - type: Support
+    url: https://www.entergy.com/contact
+  - type: Login
+    url: https://www.myentergy.com/s/login/
+  - type: Newsroom
+    url: https://www.entergy.com/news
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-09-06'
+  status: enriched
+  artifacts_added: 19
+  pass: local-v3

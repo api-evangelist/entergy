@@ -1,0 +1,25 @@
+generated: '2026-09-06'
+method: probed
+source: >-
+  Response headers observed on https://www.entergy.com/wp-json/wp/v2/posts?per_page=1
+  (HTTP 200, 2026-09-06) and a search of entergy.com for any published API limit.
+name: Entergy rate limits
+limit_count: 0
+limits: []
+response_headers: []
+status_on_exhaustion: null
+note: >-
+  Entergy publishes no rate limits, because Entergy publishes no developer program. No
+  RateLimit-*, X-RateLimit-* or Retry-After header appeared on any observed response from
+  www.entergy.com/wp-json/ or gis.entergy.com. That is not the same as unlimited: the surface
+  sits behind Cloudflare with a managed bot challenge (a plain crawler User-Agent gets HTTP
+  403 on the HTML site), so throttling exists at the edge, is undocumented, and will present
+  as a challenge page rather than as a 429 with a retry hint. An agent has no published signal
+  to back off against.
+evidence:
+  - url: https://www.entergy.com/wp-json/wp/v2/posts?per_page=1
+    status: 200
+    finding: No rate-limit header of any kind in the response.
+  - url: https://www.entergy.com/robots.txt
+    status: 200
+    finding: 'Only: Disallow /wp-admin/, Allow /wp-admin/admin-ajax.php. No crawl-delay, no API rules.'

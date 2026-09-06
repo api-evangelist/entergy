@@ -1,0 +1,65 @@
+overlay: 1.0.0
+info:
+  title: Entergy WordPress REST API enhancements
+  version: 1.0.0
+extends: ../openapi/entergy-wordpress-rest-openapi.yml
+x-generated: '2026-09-06'
+x-method: derived
+x-source: >-
+  Live response headers and error bodies observed on https://www.entergy.com/wp-json/ on
+  2026-09-06. This overlay records what the WordPress route index does NOT describe and what
+  we measured on the wire; it never mutates the original document.
+actions:
+  - target: $.info
+    description: Record the runtime facts the route index omits.
+    update:
+      x-observed-at: '2026-09-06'
+      x-anonymous-read: true
+      x-published-rate-limit: false
+      x-edge: >-
+        Cloudflare managed challenge in front of the HTML site (a bare crawler User-Agent gets
+        HTTP 403); WP Engine origin. Throttling presents as a challenge page, not a 429.
+  - target: $.paths['/wp/v2/posts'].get
+    description: Attach the pagination headers observed live, which the route index does not declare.
+    update:
+      x-pagination:
+        style: page-number
+        params: [page, per_page, offset]
+        response_headers: [X-WP-Total, X-WP-TotalPages, Link]
+        observed:
+          X-WP-Total: 5958
+          link_rel: next
+      responses:
+        '200':
+          headers:
+            X-WP-Total:
+              description: Total matching items.
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total pages for the requested per_page.
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 rel="next" / rel="prev" pagination cursors.
+              schema:
+                type: string
+  - target: $.paths['/wp/v2/users'].get
+    description: Mark the routes proven terminal for an anonymous caller.
+    update:
+      x-anonymous-access: denied
+      x-observed-error:
+        status: 401
+        code: rest_cannot_access
+        message: Only authenticated users can access the User endpoint REST API.
+      x-retryable: false
+  - target: $.paths['/wp-abilities/v1/abilities'].get
+    description: >-
+      Flag the WordPress Abilities API - the agent-facing WordPress surface - as present but
+      auth-gated, so a crosswalk does not silently treat it as absent.
+    update:
+      x-agent-surface: wordpress-abilities
+      x-anonymous-access: denied
+      x-observed-error:
+        status: 401
+        code: rest_forbidden

@@ -1,0 +1,73 @@
+generated: '2026-09-06'
+method: derived
+source: openapi/entergy-wordpress-rest-openapi.yml and mcp/entergy-mcp.yml
+name: Entergy tool crosswalk
+note: >-
+  There is no MCP server and no GraphQL endpoint for Entergy, so this crosswalk maps the
+  CANDIDATE tools in mcp/entergy-mcp.yml onto the derived OpenAPI operations that would back
+  them, and - more usefully - records the surfaces that carry capability the REST contract does
+  not. Confidence is high on every row only because each tool was defined FROM the operation it
+  binds to; that is a derivation, not a verification against a live server, and no live server
+  exists to verify against.
+surfaces:
+  openapi: openapi/entergy-wordpress-rest-openapi.yml
+  openapi_base: https://www.entergy.com/wp-json
+  openapi_gated: false
+  graphql: null
+  mcp: null
+  soap_wsdl: wsdl/entergy-arcgis-catalog.wsdl
+  soap_gated: true
+  arcgis_rest: https://gis.entergy.com/arcgis/rest/services
+  arcgis_gated: true
+crosswalk:
+  - tool: list_entergy_news_posts
+    category: content
+    rest: [get_wp_v2_posts]
+    binding: direct
+    confidence: high
+  - tool: get_entergy_news_post
+    category: content
+    rest: [get_wp_v2_posts_id]
+    binding: direct
+    confidence: high
+  - tool: list_entergy_pages
+    category: content
+    rest: [get_wp_v2_pages]
+    binding: direct
+    confidence: high
+  - tool: list_entergy_categories
+    category: taxonomy
+    rest: [get_wp_v2_categories]
+    binding: direct
+    confidence: high
+  - tool: search_entergy_site
+    category: search
+    rest: [get_wp_v2_search]
+    binding: direct
+    confidence: high
+mcp_only: []
+rest_only:
+  - operations: 272 of 277
+    reason: >-
+      Everything outside the five anonymous read routes above is either a mutating WordPress
+      content route or a privileged read route requiring an Application Password Entergy does
+      not issue to third parties. Exposing them as tools would produce tools that always 401.
+non_rest_capability:
+  - surface: SOAP Catalog at https://gis.entergy.com/arcgis/services
+    operations: [GetFolders, GetServiceDescriptions, GetServiceDescriptionsEx, GetMessageFormats, GetMessageVersion, GetTokenServiceURL, RequiresTokens]
+    reason: >-
+      Seven SOAP operations with no REST equivalent in the WordPress contract. RequiresTokens
+      answered anonymously (Result 1); the rest need a token. This is Entergy's electric-network
+      GIS, a genuinely different data core from the CMS.
+  - surface: Green Button Connect My Data (NAESB REQ.21 ESPI)
+    operations: []
+    reason: >-
+      Customer interval-meter data. Neither the REST nor the SOAP contract touches it, and no
+      ESPI endpoint is published. Recorded so the capability is not silently dropped.
+coverage:
+  rest_operations: 277
+  rest_operations_anonymous: 5
+  tools_defined: 5
+  tools_live: 0
+  graphql_fields: 0
+  soap_operations: 7

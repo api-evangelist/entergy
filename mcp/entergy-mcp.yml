@@ -1,0 +1,49 @@
+generated: '2026-09-06'
+method: derived
+source: openapi/entergy-wordpress-rest-openapi.yml
+name: Entergy MCP server
+status: candidate
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: none
+  verified: derived
+note: >-
+  NOBODY SHIPS AN MCP SERVER FOR ENTERGY. This file records a derived candidate only, and no
+  MCPServer pointer is emitted in apis.yml - emitting one would tell an agent that a callable
+  server exists. No endpoint URL is guessed. The tools below are the anonymous read operations
+  of the WordPress REST API that entergy.com already serves; they are what an MCP server over
+  this surface COULD expose, not what anyone has built. One adjacent fact is worth recording:
+  the site's WordPress runs the wp-abilities/v1 namespace - the WordPress Abilities API, the
+  layer WordPress exposes to agents and MCP bridges - but /wp-json/wp-abilities/v1/abilities
+  returns HTTP 401 rest_forbidden, so its ability list is auth-gated and was not read.
+candidate_tools:
+  - name: list_entergy_news_posts
+    description: List news posts published on entergy.com, newest first, with pagination.
+    rest: [get_wp_v2_posts]
+    auth: none
+  - name: get_entergy_news_post
+    description: Retrieve one entergy.com news post by id.
+    rest: [get_wp_v2_posts_id]
+    auth: none
+  - name: list_entergy_pages
+    description: List corporate pages published on entergy.com.
+    rest: [get_wp_v2_pages]
+    auth: none
+  - name: list_entergy_categories
+    description: List the content categories entergy.com organizes its posts under.
+    rest: [get_wp_v2_categories]
+    auth: none
+  - name: search_entergy_site
+    description: Full-text search across entergy.com published content.
+    rest: [get_wp_v2_search]
+    auth: none
+gated_surfaces:
+  - surface: https://www.entergy.com/wp-json/wp-abilities/v1/abilities
+    status: 401
+    note: WordPress Abilities API present but not readable anonymously.
+  - surface: https://gis.entergy.com/arcgis/rest/services
+    status: 200
+    note: 'Body is {"error":{"code":499,"message":"Token Required"}} - ArcGIS services are token-gated.'

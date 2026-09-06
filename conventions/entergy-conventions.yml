@@ -1,0 +1,124 @@
+generated: '2026-09-06'
+method: derived
+source: >-
+  openapi/entergy-wordpress-rest-openapi.yml and the live response headers observed on
+  https://www.entergy.com/wp-json/wp/v2/posts?per_page=1 (HTTP 200, 2026-09-06).
+name: Entergy API conventions
+summary: >-
+  Cross-cutting runtime semantics for the only anonymous, callable API Entergy serves - the
+  WordPress REST API on www.entergy.com. Entergy publishes no API style guide, so every rule
+  below is either WordPress core behaviour observed live on this host or explicitly recorded
+  as absent.
+auth_style:
+  summary: Anonymous for public read routes; WordPress Application Passwords (HTTP Basic) or cookie+X-WP-Nonce for everything else.
+  see: authentication/entergy-authentication.yml
+pagination:
+  style: page-number
+  params:
+    - name: page
+      description: 1-indexed page number.
+    - name: per_page
+      description: Items per page, WordPress default 10, maximum 100.
+    - name: offset
+      description: Skip N items, supported on collection routes.
+  response_fields: []
+  response_headers:
+    - name: X-WP-Total
+      description: Total matching items. Observed value 5958 on wp/v2/posts.
+    - name: X-WP-TotalPages
+      description: Total pages for the requested per_page.
+    - name: Link
+      description: RFC 8288 rel="next" / rel="prev" cursors. Observed rel="next" on wp/v2/posts.
+  evidence: https://www.entergy.com/wp-json/wp/v2/posts?per_page=1
+  evidence_status: 200
+field_expansion:
+  supported: true
+  params:
+    - _fields (sparse fieldsets, comma-separated)
+    - _embed (embed linked resources inline)
+  note: WordPress core behaviour, advertised in the route index args on collection routes.
+metadata:
+  supported: partial
+  note: wp/v2 object schemas expose a meta object, but it is empty for anonymous callers on this host.
+request_id_tracing:
+  supported: false
+  note: >-
+    No request-id header is returned. The only correlatable identifiers on a response are
+    Cloudflare's cf-ray and WP Engine's x-cache headers, which are edge artifacts, not an
+    API tracing contract.
+versioning:
+  style: path-namespace
+  current: wp/v2
+  namespaces:
+    - oembed/1.0
+    - wpe/cache-plugin/v1
+    - wpe_sign_on_plugin/v1
+    - wpsl/v1
+    - mdd_pro/v2
+    - wp/v2
+    - wp-site-health/v1
+    - wp-block-editor/v1
+    - wp-abilities/v1
+  note: >-
+    Versions are namespace segments under /wp-json/. There is no version header, no
+    deprecation header, and no published policy for changing them.
+error_envelope:
+  shape: '{ "code": "<string>", "message": "<string>", "data": { "status": <int> } }'
+  format: vendor-specific
+  rfc9457: false
+  content_type: application/json
+  see: errors/entergy-problem-types.yml
+  evidence: https://www.entergy.com/wp-json/wp-abilities/v1/abilities
+  evidence_status: 401
+rate_limit_signaling:
+  headers: []
+  status_on_exhaustion: null
+  note: >-
+    No RateLimit-*, X-RateLimit-* or Retry-After header was returned on any observed
+    response, and no limit is documented. See rate-limits/entergy-rate-limits.yml.
+idempotency:
+  coverage: none
+  mechanism: null
+  header: null
+  retention: null
+  note: >-
+    No Idempotency-Key header, no request-deduplication semantics, and no documentation of
+    replay protection anywhere on the surface. The mutating routes in the derived spec are
+    WordPress content-management routes that require credentials Entergy does not issue to
+    third parties; an agent replaying a write here would create duplicates with nothing to
+    stop it.
+reversibility:
+  grade: documented
+  applies_to: >-
+    The WordPress content routes only. There is no public write surface: every mutating route
+    requires an Application Password on an Entergy CMS account, and Entergy does not issue
+    those to third parties.
+  surfaces:
+    - write_surface: DELETE /wp/v2/posts/{id}, /wp/v2/pages/{id}, /wp/v2/media/{id} and sibling content routes
+      reversal_operation: >-
+        Soft delete. WordPress core moves the object to status "trash" unless force=true is
+        passed, and restoring it is a POST to the same resource with status=publish or draft.
+      operation_id: delete_wp_v2_posts_id
+      reversal_operation_id: post_wp_v2_posts_id
+      window: null
+      window_source: null
+      note: >-
+        The reversal path is real and is visible in the derived spec (the force parameter is
+        present in the route index args), which is why this grades `documented`. It does NOT
+        grade `verified`, because Entergy publishes NO retention window for trashed content -
+        WordPress's own default is 30 days and is site-configurable, and this host states
+        nothing. An agent cannot learn from Entergy how long an undelete stays possible, so no
+        window is asserted here.
+    - write_surface: POST /mdd_pro/v2/bulk_delete_unused and the mdd_pro/v2 bulk media routes
+      reversal_operation: null
+      operation_id: post_mdd_pro_v2_bulk_delete_unused
+      window: null
+      note: >-
+        Bulk media deletion routes exposed by a site plugin. No reversal operation is
+        advertised in the route index, and none is documented. Recorded as irreversible.
+  dry_run_mode:
+    supported: partial
+    note: >-
+      The mdd_pro/v2 namespace advertises *_test siblings (index_test, bulk_delete_unused_test,
+      smart_bulk_delete_test) which read as rehearsal endpoints, but they are undocumented and
+      credential-gated, so no behaviour is asserted about them.

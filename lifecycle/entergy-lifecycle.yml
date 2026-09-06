@@ -1,0 +1,50 @@
+generated: '2026-09-06'
+method: searched
+source: https://www.entergy.com/, https://www.entergy.com/wp-json/, https://www.entergy.com/viewoutages
+name: Entergy API lifecycle
+versioning:
+  scheme: path-namespace
+  current: wp/v2
+  policy_url: null
+  note: >-
+    Versions exist only as WordPress namespace segments. Entergy publishes no versioning
+    policy, no support window and no statement about what changing a namespace would mean for
+    a caller.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: []
+  note: >-
+    No deprecation policy, no Deprecation or Sunset header on any observed response, and no
+    operation in the derived spec is marked deprecated. A caller gets no warning before a
+    namespace or plugin route disappears. No Deprecation pointer is emitted in apis.yml,
+    because there is nothing to point at.
+sla:
+  published: false
+  note: No API service-level commitment of any kind.
+status_page:
+  url: null
+  published: false
+  note: >-
+    Entergy has no API status page and no NO StatusPage pointer is emitted. It does publish a
+    customer outage map at https://www.entergy.com/viewoutages (HTTP 200), but that reports
+    the electric grid, not API availability, and the application behind it belongs to
+    DataCapable rather than to Entergy. Treating it as a status page would credit Entergy with
+    an operational surface it does not run.
+change_log:
+  url: null
+  published: false
+  note: >-
+    Entergy publishes a corporate newsroom (https://www.entergy.com/news) and an RSS feed
+    (https://www.entergy.com/feed, HTTP 200), which cover company news, not API changes. No
+    dated API changelog exists, so no changelog/ artifact and no ChangeLog pointer were
+    written.
+evidence:
+  - url: https://www.entergy.com/wp-json/wp/v2/posts?per_page=1
+    status: 200
+    finding: No Deprecation, Sunset or API-Version header on the response.
+  - url: https://www.entergy.com/viewoutages
+    status: 200
+    finding: Outage map, third-party application (DataCapable), not an API status page.
