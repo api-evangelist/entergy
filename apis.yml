@@ -49,50 +49,147 @@ position: Consuming
 access: 3rd-Party
 specificationVersion: '0.23'
 apis:
-  - name: Entergy WordPress REST API
-    description: >-
-      The public, anonymous, machine-readable REST API that entergy.com's own content
-      management system serves at https://www.entergy.com/wp-json/. It is the WordPress core
-      REST API (plus site plugins), advertised on every page as rel="https://api.w.org/", and
-      it exposes Entergy's published news, storm updates, corporate pages, media, categories
-      and site search. It is NOT an energy, outage or meter-data API, and Entergy publishes no
-      developer portal for it. Recorded here because it is the only callable, self-describing
-      contract on an Entergy host that answers without credentials, and because the route index
-      identifies its owner unambiguously: name "Entergy", url "https://www.entergy.com".
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/entergy.png
-    humanURL: https://www.entergy.com/wp-json/
-    baseURL: https://www.entergy.com/wp-json
-    tags:
-      - Content
-      - News
-      - WordPress
-    properties:
-      - type: OpenAPI
-        url: openapi/entergy-wordpress-rest-openapi.yml
-      - type: Overlay
-        url: overlays/entergy-wordpress-rest-overlay.yaml
-      - type: ToolCrosswalk
-        url: mcp/entergy-tool-crosswalk.yml
-  - name: Entergy ArcGIS Server
-    description: >-
-      Entergy's electric-network GIS platform at gis.entergy.com, running Esri ArcGIS Server
-      10.7.1. The service-info document answers anonymously and declares token-based security
-      with a token service at https://gis.entergy.com/arcgis/tokens/; the SOAP catalog at
-      https://gis.entergy.com/arcgis/services publishes a WSDL 1.1 contract with seven
-      operations whose soap:address points back at gis.entergy.com. The service directory
-      itself returns HTTP 200 carrying {"error":{"code":499,"message":"Token Required"}}, so the
-      API is real and reachable while the map services behind it are not public.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/entergy.png
-    humanURL: https://gis.entergy.com/arcgis/rest/info?f=json
-    baseURL: https://gis.entergy.com/arcgis
-    tags:
-      - GIS
-      - Geospatial
-      - SOAP
-    properties:
-      - type: WSDL
-        url: wsdl/entergy-arcgis-catalog.wsdl
+- name: Entergy ArcGIS Server
+  description: >-
+    Entergy's electric-network GIS platform at gis.entergy.com, running Esri ArcGIS Server 10.7.1. The
+    service-info document answers anonymously and declares token-based security with a token service at
+    https://gis.entergy.com/arcgis/tokens/; the SOAP catalog at https://gis.entergy.com/arcgis/services
+    publishes a WSDL 1.1 contract with seven operations whose soap:address points back at gis.entergy.com.
+    The service directory itself returns HTTP 200 carrying {"error":{"code":499,"message":"Token Required"}},
+    so the API is real and reachable while the map services behind it are not public.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/entergy.png
+  humanURL: https://gis.entergy.com/arcgis/rest/info?f=json
+  baseURL: https://gis.entergy.com/arcgis
+  tags:
+  - GIS
+  - Geospatial
+  - SOAP
+  properties:
+  - type: WSDL
+    url: wsdl/entergy-arcgis-catalog.wsdl
+- aid: entergy:entergy-mdd-pro-v2-api
+  name: Entergy Mdd Pro/v2 API
+  description: The mdd_pro/v2 API from Entergy — 13 operation(s) for mdd_pro/v2.
+  humanURL: https://www.entergy.com/wp-json/
+  baseURL: https://www.entergy.com/wp-json
+  tags:
+  - mdd_pro/v2
+  properties:
+  - type: OpenAPI
+    url: openapi/entergy-mdd-pro-v2-api-openapi.yml
+  - type: ToolCrosswalk
+    url: mcp/entergy-tool-crosswalk.yml
+- aid: entergy:entergy-oembed-1-0-api
+  name: Entergy Oembed/1.0 API
+  description: The oembed/1.0 API from Entergy — 3 operation(s) for oembed/1.0.
+  humanURL: https://www.entergy.com/wp-json/
+  baseURL: https://www.entergy.com/wp-json
+  tags:
+  - oembed/1.0
+  properties:
+  - type: OpenAPI
+    url: openapi/entergy-oembed-1-0-api-openapi.yml
+  - type: ToolCrosswalk
+    url: mcp/entergy-tool-crosswalk.yml
+- aid: entergy:entergy-wp-abilities-v1-api
+  name: Entergy Wp Abilities/v1 API
+  description: The wp-abilities/v1 API from Entergy — 5 operation(s) for wp-abilities/v1.
+  humanURL: https://www.entergy.com/wp-json/
+  baseURL: https://www.entergy.com/wp-json
+  tags:
+  - wp-abilities/v1
+  properties:
+  - type: OpenAPI
+    url: openapi/entergy-wp-abilities-v1-api-openapi.yml
+  - type: ToolCrosswalk
+    url: mcp/entergy-tool-crosswalk.yml
+- aid: entergy:entergy-wp-api
+  name: Entergy Wp API
+  description: The wp API from Entergy — 1 operation(s) for wp.
+  humanURL: https://www.entergy.com/wp-json/
+  baseURL: https://www.entergy.com/wp-json
+  tags:
+  - wp
+  properties:
+  - type: OpenAPI
+    url: openapi/entergy-wp-api-openapi.yml
+  - type: ToolCrosswalk
+    url: mcp/entergy-tool-crosswalk.yml
+- aid: entergy:entergy-wp-block-editor-v1-api
+  name: Entergy Wp Block Editor/v1 API
+  description: The wp-block-editor/v1 API from Entergy — 4 operation(s) for wp-block-editor/v1.
+  humanURL: https://www.entergy.com/wp-json/
+  baseURL: https://www.entergy.com/wp-json
+  tags:
+  - wp-block-editor/v1
+  properties:
+  - type: OpenAPI
+    url: openapi/entergy-wp-block-editor-v1-api-openapi.yml
+  - type: ToolCrosswalk
+    url: mcp/entergy-tool-crosswalk.yml
+- aid: entergy:entergy-wp-site-health-v1-api
+  name: Entergy Wp Site Health/v1 API
+  description: The wp-site-health/v1 API from Entergy — 8 operation(s) for wp-site-health/v1.
+  humanURL: https://www.entergy.com/wp-json/
+  baseURL: https://www.entergy.com/wp-json
+  tags:
+  - wp-site-health/v1
+  properties:
+  - type: OpenAPI
+    url: openapi/entergy-wp-site-health-v1-api-openapi.yml
+  - type: ToolCrosswalk
+    url: mcp/entergy-tool-crosswalk.yml
+- aid: entergy:entergy-wp-v2-api
+  name: Entergy Wp/v2 API
+  description: The wp/v2 API from Entergy — 108 operation(s) for wp/v2.
+  humanURL: https://www.entergy.com/wp-json/
+  baseURL: https://www.entergy.com/wp-json
+  tags:
+  - wp/v2
+  properties:
+  - type: OpenAPI
+    url: openapi/entergy-wp-v2-api-openapi.yml
+  - type: ToolCrosswalk
+    url: mcp/entergy-tool-crosswalk.yml
+- aid: entergy:entergy-wpe-cache-plugin-v1-api
+  name: Entergy Wpe/cache Plugin/v1 API
+  description: The wpe/cache-plugin/v1 API from Entergy — 3 operation(s) for wpe/cache-plugin/v1.
+  humanURL: https://www.entergy.com/wp-json/
+  baseURL: https://www.entergy.com/wp-json
+  tags:
+  - wpe/cache-plugin/v1
+  properties:
+  - type: OpenAPI
+    url: openapi/entergy-wpe-cache-plugin-v1-api-openapi.yml
+  - type: ToolCrosswalk
+    url: mcp/entergy-tool-crosswalk.yml
+- aid: entergy:entergy-wpe-sign-on-plugin-v1-api
+  name: Entergy Wpe Sign On Plugin/v1 API
+  description: The wpe_sign_on_plugin/v1 API from Entergy — 4 operation(s) for wpe_sign_on_plugin/v1.
+  humanURL: https://www.entergy.com/wp-json/
+  baseURL: https://www.entergy.com/wp-json
+  tags:
+  - wpe_sign_on_plugin/v1
+  properties:
+  - type: OpenAPI
+    url: openapi/entergy-wpe-sign-on-plugin-v1-api-openapi.yml
+  - type: ToolCrosswalk
+    url: mcp/entergy-tool-crosswalk.yml
+- aid: entergy:entergy-wpsl-v1-api
+  name: Entergy Wpsl/v1 API
+  description: The wpsl/v1 API from Entergy — 2 operation(s) for wpsl/v1.
+  humanURL: https://www.entergy.com/wp-json/
+  baseURL: https://www.entergy.com/wp-json
+  tags:
+  - wpsl/v1
+  properties:
+  - type: OpenAPI
+    url: openapi/entergy-wpsl-v1-api-openapi.yml
+  - type: ToolCrosswalk
+    url: mcp/entergy-tool-crosswalk.yml
 common:
+  - type: Overlay
+    url: overlays/entergy-wordpress-rest-overlay.yaml
   - type: DomainSecurity
     url: security/entergy-domain-security.yml
   - type: LinkedIn
