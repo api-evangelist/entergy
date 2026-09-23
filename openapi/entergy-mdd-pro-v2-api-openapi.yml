@@ -1,0 +1,396 @@
+openapi: 3.2.0
+info:
+  title: Entergy WordPress REST Mdd Pro/v2 API
+  version: 1.0.0
+  summary: The public WordPress core REST API exposed by entergy.com.
+  description: The anonymous, machine-readable REST surface published at https://www.entergy.com/wp-json/.
+  contact:
+    name: Entergy Corporation
+    url: https://www.entergy.com/contact
+  x-generated-from: https://www.entergy.com/wp-json/ (WordPress REST API route index, fetched 2026-09-06, HTTP 200)
+  x-provenance-method: derived
+servers:
+- url: https://www.entergy.com/wp-json
+  description: WordPress REST API root on Entergy's corporate site.
+tags:
+- name: mdd_pro/v2
+paths:
+  /mdd_pro/v2:
+    get:
+      operationId: get_mdd_pro_v2
+      summary: GET /mdd_pro/v2
+      description: WordPress REST API route /mdd_pro/v2 in namespace mdd_pro/v2, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - mdd_pro/v2
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+      parameters:
+      - name: namespace
+        in: query
+        required: false
+        schema:
+          type: string
+          default: mdd_pro/v2
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          default: view
+  /mdd_pro/v2/bulk_delete_unused:
+    post:
+      operationId: post_mdd_pro_v2_bulk_delete_unused
+      summary: POST /mdd_pro/v2/bulk_delete_unused
+      description: WordPress REST API route /mdd_pro/v2/bulk_delete_unused in namespace mdd_pro/v2, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - mdd_pro/v2
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+  /mdd_pro/v2/bulk_delete_unused_status:
+    get:
+      operationId: get_mdd_pro_v2_bulk_delete_unused_status
+      summary: GET /mdd_pro/v2/bulk_delete_unused_status
+      description: WordPress REST API route /mdd_pro/v2/bulk_delete_unused_status in namespace mdd_pro/v2, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - mdd_pro/v2
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+  /mdd_pro/v2/bulk_delete_unused_stop:
+    post:
+      operationId: post_mdd_pro_v2_bulk_delete_unused_stop
+      summary: POST /mdd_pro/v2/bulk_delete_unused_stop
+      description: WordPress REST API route /mdd_pro/v2/bulk_delete_unused_stop in namespace mdd_pro/v2, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - mdd_pro/v2
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+  /mdd_pro/v2/bulk_delete_unused_test:
+    post:
+      operationId: post_mdd_pro_v2_bulk_delete_unused_test
+      summary: POST /mdd_pro/v2/bulk_delete_unused_test
+      description: WordPress REST API route /mdd_pro/v2/bulk_delete_unused_test in namespace mdd_pro/v2, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - mdd_pro/v2
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+  /mdd_pro/v2/index:
+    post:
+      operationId: post_mdd_pro_v2_index
+      summary: POST /mdd_pro/v2/index
+      description: WordPress REST API route /mdd_pro/v2/index in namespace mdd_pro/v2, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - mdd_pro/v2
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+  /mdd_pro/v2/index_status:
+    get:
+      operationId: get_mdd_pro_v2_index_status
+      summary: GET /mdd_pro/v2/index_status
+      description: WordPress REST API route /mdd_pro/v2/index_status in namespace mdd_pro/v2, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - mdd_pro/v2
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+  /mdd_pro/v2/index_stop:
+    post:
+      operationId: post_mdd_pro_v2_index_stop
+      summary: POST /mdd_pro/v2/index_stop
+      description: WordPress REST API route /mdd_pro/v2/index_stop in namespace mdd_pro/v2, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - mdd_pro/v2
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+  /mdd_pro/v2/index_test:
+    post:
+      operationId: post_mdd_pro_v2_index_test
+      summary: POST /mdd_pro/v2/index_test
+      description: WordPress REST API route /mdd_pro/v2/index_test in namespace mdd_pro/v2, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - mdd_pro/v2
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+  /mdd_pro/v2/smart_bulk_delete:
+    post:
+      operationId: post_mdd_pro_v2_smart_bulk_delete
+      summary: POST /mdd_pro/v2/smart_bulk_delete
+      description: WordPress REST API route /mdd_pro/v2/smart_bulk_delete in namespace mdd_pro/v2, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - mdd_pro/v2
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+  /mdd_pro/v2/smart_bulk_delete_status:
+    get:
+      operationId: get_mdd_pro_v2_smart_bulk_delete_status
+      summary: GET /mdd_pro/v2/smart_bulk_delete_status
+      description: WordPress REST API route /mdd_pro/v2/smart_bulk_delete_status in namespace mdd_pro/v2, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - mdd_pro/v2
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+  /mdd_pro/v2/smart_bulk_delete_stop:
+    post:
+      operationId: post_mdd_pro_v2_smart_bulk_delete_stop
+      summary: POST /mdd_pro/v2/smart_bulk_delete_stop
+      description: WordPress REST API route /mdd_pro/v2/smart_bulk_delete_stop in namespace mdd_pro/v2, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - mdd_pro/v2
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+  /mdd_pro/v2/smart_bulk_delete_test:
+    post:
+      operationId: post_mdd_pro_v2_smart_bulk_delete_test
+      summary: POST /mdd_pro/v2/smart_bulk_delete_test
+      description: WordPress REST API route /mdd_pro/v2/smart_bulk_delete_test in namespace mdd_pro/v2, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - mdd_pro/v2
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+components:
+  schemas:
+    WPError:
+      type: object
+      description: WordPress REST API error envelope, observed live on this host.
+      properties:
+        code:
+          type: string
+          examples:
+          - rest_forbidden
+          - rest_no_route
+        message:
+          type: string
+          examples:
+          - Sorry, you are not allowed to do that.
+        data:
+          type: object
+          properties:
+            status:
+              type: integer
+              examples:
+              - 401
+              - 404
+  securitySchemes:
+    applicationPassword:
+      type: http
+      scheme: basic
+      description: WordPress Application Passwords. The route index advertises the authorization endpoint at https://www.entergy.com/wp-admin/authorize-application.php. Write routes and privileged read routes require it; the public read routes do not.

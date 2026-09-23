@@ -1,7 +1,9 @@
 ---
 title: Data centers and Entergy customers - We power life.
 url: https://www.entergy.com/datacenters
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Entergy" press release artificial intelligence'
 position: 2
 source: serpapi-google

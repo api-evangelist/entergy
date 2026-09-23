@@ -1,0 +1,416 @@
+openapi: 3.2.0
+info:
+  title: Entergy WordPress REST Wp Abilities/v1 API
+  version: 1.0.0
+  summary: The public WordPress core REST API exposed by entergy.com.
+  description: The anonymous, machine-readable REST surface published at https://www.entergy.com/wp-json/.
+  contact:
+    name: Entergy Corporation
+    url: https://www.entergy.com/contact
+  x-generated-from: https://www.entergy.com/wp-json/ (WordPress REST API route index, fetched 2026-09-06, HTTP 200)
+  x-provenance-method: derived
+servers:
+- url: https://www.entergy.com/wp-json
+  description: WordPress REST API root on Entergy's corporate site.
+tags:
+- name: wp-abilities/v1
+paths:
+  /wp-abilities/v1:
+    get:
+      operationId: get_wp_abilities_v1
+      summary: GET /wp-abilities/v1
+      description: WordPress REST API route /wp-abilities/v1 in namespace wp-abilities/v1, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - wp-abilities/v1
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+      parameters:
+      - name: namespace
+        in: query
+        required: false
+        schema:
+          type: string
+          default: wp-abilities/v1
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          default: view
+  /wp-abilities/v1/abilities:
+    get:
+      operationId: get_wp_abilities_v1_abilities
+      summary: GET /wp-abilities/v1/abilities
+      description: WordPress REST API route /wp-abilities/v1/abilities in namespace wp-abilities/v1, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - wp-abilities/v1
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+      parameters:
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+        description: Scope under which the request is made; determines fields present in response.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+        description: Current page of the collection.
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 50
+        description: Maximum number of items to be returned in result set.
+      - name: category
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Limit results to abilities in specific ability category.
+      - name: namespace
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Limit results to abilities in a specific namespace.
+      - name: meta
+        in: query
+        required: false
+        schema:
+          type: object
+        description: Limit results to abilities matching all of the given meta fields.
+  /wp-abilities/v1/abilities/{name}:
+    parameters:
+    - name: name
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Path segment taken verbatim from the WordPress route pattern.
+    get:
+      operationId: get_wp_abilities_v1_abilities_name
+      summary: GET /wp-abilities/v1/abilities/{name}
+      description: WordPress REST API route /wp-abilities/v1/abilities/(?P[a-zA-Z0-9\-\/]+) in namespace wp-abilities/v1, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - wp-abilities/v1
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+  /wp-abilities/v1/abilities/{name}/run:
+    parameters:
+    - name: name
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Path segment taken verbatim from the WordPress route pattern.
+    get:
+      operationId: get_wp_abilities_v1_abilities_name_run
+      summary: GET /wp-abilities/v1/abilities/{name}/run
+      description: WordPress REST API route /wp-abilities/v1/abilities/(?P[a-zA-Z0-9\-\/]+?)/run in namespace wp-abilities/v1, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - wp-abilities/v1
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+      parameters:
+      - name: input
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Input parameters for the ability execution.
+    post:
+      operationId: post_wp_abilities_v1_abilities_name_run
+      summary: POST /wp-abilities/v1/abilities/{name}/run
+      description: WordPress REST API route /wp-abilities/v1/abilities/(?P[a-zA-Z0-9\-\/]+?)/run in namespace wp-abilities/v1, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - wp-abilities/v1
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                input:
+                  type: integer
+                  description: Input parameters for the ability execution.
+    put:
+      operationId: put_wp_abilities_v1_abilities_name_run
+      summary: PUT /wp-abilities/v1/abilities/{name}/run
+      description: WordPress REST API route /wp-abilities/v1/abilities/(?P[a-zA-Z0-9\-\/]+?)/run in namespace wp-abilities/v1, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - wp-abilities/v1
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                input:
+                  type: integer
+                  description: Input parameters for the ability execution.
+    patch:
+      operationId: patch_wp_abilities_v1_abilities_name_run
+      summary: PATCH /wp-abilities/v1/abilities/{name}/run
+      description: WordPress REST API route /wp-abilities/v1/abilities/(?P[a-zA-Z0-9\-\/]+?)/run in namespace wp-abilities/v1, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - wp-abilities/v1
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                input:
+                  type: integer
+                  description: Input parameters for the ability execution.
+    delete:
+      operationId: delete_wp_abilities_v1_abilities_name_run
+      summary: DELETE /wp-abilities/v1/abilities/{name}/run
+      description: WordPress REST API route /wp-abilities/v1/abilities/(?P[a-zA-Z0-9\-\/]+?)/run in namespace wp-abilities/v1, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - wp-abilities/v1
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+      parameters:
+      - name: input
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Input parameters for the ability execution.
+  /wp-abilities/v1/categories:
+    get:
+      operationId: get_wp_abilities_v1_categories
+      summary: GET /wp-abilities/v1/categories
+      description: WordPress REST API route /wp-abilities/v1/categories in namespace wp-abilities/v1, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - wp-abilities/v1
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+      parameters:
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+        description: Scope under which the request is made; determines fields present in response.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+        description: Current page of the collection.
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 50
+        description: Maximum number of items to be returned in result set.
+components:
+  schemas:
+    WPError:
+      type: object
+      description: WordPress REST API error envelope, observed live on this host.
+      properties:
+        code:
+          type: string
+          examples:
+          - rest_forbidden
+          - rest_no_route
+        message:
+          type: string
+          examples:
+          - Sorry, you are not allowed to do that.
+        data:
+          type: object
+          properties:
+            status:
+              type: integer
+              examples:
+              - 401
+              - 404
+  securitySchemes:
+    applicationPassword:
+      type: http
+      scheme: basic
+      description: WordPress Application Passwords. The route index advertises the authorization endpoint at https://www.entergy.com/wp-admin/authorize-application.php. Write routes and privileged read routes require it; the public read routes do not.

@@ -1,0 +1,194 @@
+openapi: 3.2.0
+info:
+  title: Entergy WordPress REST Oembed/1.0 API
+  version: 1.0.0
+  summary: The public WordPress core REST API exposed by entergy.com.
+  description: The anonymous, machine-readable REST surface published at https://www.entergy.com/wp-json/.
+  contact:
+    name: Entergy Corporation
+    url: https://www.entergy.com/contact
+  x-generated-from: https://www.entergy.com/wp-json/ (WordPress REST API route index, fetched 2026-09-06, HTTP 200)
+  x-provenance-method: derived
+servers:
+- url: https://www.entergy.com/wp-json
+  description: WordPress REST API root on Entergy's corporate site.
+tags:
+- name: oembed/1.0
+paths:
+  /oembed/1.0:
+    get:
+      operationId: get_oembed_1_0
+      summary: GET /oembed/1.0
+      description: WordPress REST API route /oembed/1.0 in namespace oembed/1.0, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - oembed/1.0
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+      parameters:
+      - name: namespace
+        in: query
+        required: false
+        schema:
+          type: string
+          default: oembed/1.0
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          default: view
+  /oembed/1.0/embed:
+    get:
+      operationId: get_oembed_1_0_embed
+      summary: GET /oembed/1.0/embed
+      description: WordPress REST API route /oembed/1.0/embed in namespace oembed/1.0, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - oembed/1.0
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+      parameters:
+      - name: url
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uri
+        description: The URL of the resource for which to fetch oEmbed data.
+      - name: format
+        in: query
+        required: false
+        schema:
+          type: string
+          default: json
+      - name: maxwidth
+        in: query
+        required: false
+        schema:
+          type: string
+          default: 600
+  /oembed/1.0/proxy:
+    get:
+      operationId: get_oembed_1_0_proxy
+      summary: GET /oembed/1.0/proxy
+      description: WordPress REST API route /oembed/1.0/proxy in namespace oembed/1.0, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - oembed/1.0
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+      parameters:
+      - name: url
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uri
+        description: The URL of the resource for which to fetch oEmbed data.
+      - name: format
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+        description: The oEmbed format to use.
+      - name: maxwidth
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 600
+        description: The maximum width of the embed frame in pixels.
+      - name: maxheight
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: The maximum height of the embed frame in pixels.
+      - name: discover
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+        description: Whether to perform an oEmbed discovery request for unsanctioned providers.
+components:
+  schemas:
+    WPError:
+      type: object
+      description: WordPress REST API error envelope, observed live on this host.
+      properties:
+        code:
+          type: string
+          examples:
+          - rest_forbidden
+          - rest_no_route
+        message:
+          type: string
+          examples:
+          - Sorry, you are not allowed to do that.
+        data:
+          type: object
+          properties:
+            status:
+              type: integer
+              examples:
+              - 401
+              - 404
+  securitySchemes:
+    applicationPassword:
+      type: http
+      scheme: basic
+      description: WordPress Application Passwords. The route index advertises the authorization endpoint at https://www.entergy.com/wp-admin/authorize-application.php. Write routes and privileged read routes require it; the public read routes do not.

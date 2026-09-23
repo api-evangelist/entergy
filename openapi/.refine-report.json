@@ -1,0 +1,48 @@
+{
+  "provider": "entergy",
+  "sources": [
+    "_original/entergy-wordpress-rest-openapi.yml"
+  ],
+  "outputs": [
+    "entergy-mdd-pro-v2-api-openapi.yml",
+    "entergy-oembed-1-0-api-openapi.yml",
+    "entergy-wp-api-openapi.yml",
+    "entergy-wp-abilities-v1-api-openapi.yml",
+    "entergy-wp-block-editor-v1-api-openapi.yml",
+    "entergy-wp-site-health-v1-api-openapi.yml",
+    "entergy-wp-v2-api-openapi.yml",
+    "entergy-wpe-cache-plugin-v1-api-openapi.yml",
+    "entergy-wpe-sign-on-plugin-v1-api-openapi.yml",
+    "entergy-wpsl-v1-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "entergy-wordpress-rest-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "entergy-wordpress-rest-openapi.yml: declared missing tag: mdd_pro/v2",
+    "entergy-wordpress-rest-openapi.yml: declared missing tag: oembed/1.0",
+    "entergy-wordpress-rest-openapi.yml: declared missing tag: wp",
+    "entergy-wordpress-rest-openapi.yml: declared missing tag: wp-abilities/v1",
+    "entergy-wordpress-rest-openapi.yml: declared missing tag: wp-block-editor/v1",
+    "entergy-wordpress-rest-openapi.yml: declared missing tag: wp-site-health/v1",
+    "entergy-wordpress-rest-openapi.yml: declared missing tag: wp/v2",
+    "entergy-wordpress-rest-openapi.yml: declared missing tag: wpe/cache-plugin/v1",
+    "entergy-wordpress-rest-openapi.yml: declared missing tag: wpe_sign_on_plugin/v1",
+    "entergy-wordpress-rest-openapi.yml: declared missing tag: wpsl/v1",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "entergy-mdd-pro-v2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "entergy-oembed-1-0-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "entergy-wp-abilities-v1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "entergy-wp-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "entergy-wp-block-editor-v1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "entergy-wp-site-health-v1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "entergy-wp-v2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "entergy-wpe-cache-plugin-v1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "entergy-wpe-sign-on-plugin-v1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "entergy-wpsl-v1-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

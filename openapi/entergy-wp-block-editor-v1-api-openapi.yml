@@ -1,0 +1,170 @@
+openapi: 3.2.0
+info:
+  title: Entergy WordPress REST Wp Block Editor/v1 API
+  version: 1.0.0
+  summary: The public WordPress core REST API exposed by entergy.com.
+  description: The anonymous, machine-readable REST surface published at https://www.entergy.com/wp-json/.
+  contact:
+    name: Entergy Corporation
+    url: https://www.entergy.com/contact
+  x-generated-from: https://www.entergy.com/wp-json/ (WordPress REST API route index, fetched 2026-09-06, HTTP 200)
+  x-provenance-method: derived
+servers:
+- url: https://www.entergy.com/wp-json
+  description: WordPress REST API root on Entergy's corporate site.
+tags:
+- name: wp-block-editor/v1
+paths:
+  /wp-block-editor/v1:
+    get:
+      operationId: get_wp_block_editor_v1
+      summary: GET /wp-block-editor/v1
+      description: WordPress REST API route /wp-block-editor/v1 in namespace wp-block-editor/v1, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - wp-block-editor/v1
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+      parameters:
+      - name: namespace
+        in: query
+        required: false
+        schema:
+          type: string
+          default: wp-block-editor/v1
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          default: view
+  /wp-block-editor/v1/export:
+    get:
+      operationId: get_wp_block_editor_v1_export
+      summary: GET /wp-block-editor/v1/export
+      description: WordPress REST API route /wp-block-editor/v1/export in namespace wp-block-editor/v1, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - wp-block-editor/v1
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+  /wp-block-editor/v1/navigation-fallback:
+    get:
+      operationId: get_wp_block_editor_v1_navigation_fallback
+      summary: GET /wp-block-editor/v1/navigation-fallback
+      description: WordPress REST API route /wp-block-editor/v1/navigation-fallback in namespace wp-block-editor/v1, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - wp-block-editor/v1
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+  /wp-block-editor/v1/url-details:
+    get:
+      operationId: get_wp_block_editor_v1_url_details
+      summary: GET /wp-block-editor/v1/url-details
+      description: WordPress REST API route /wp-block-editor/v1/url-details in namespace wp-block-editor/v1, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - wp-block-editor/v1
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+      parameters:
+      - name: url
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uri
+        description: The URL to process.
+components:
+  schemas:
+    WPError:
+      type: object
+      description: WordPress REST API error envelope, observed live on this host.
+      properties:
+        code:
+          type: string
+          examples:
+          - rest_forbidden
+          - rest_no_route
+        message:
+          type: string
+          examples:
+          - Sorry, you are not allowed to do that.
+        data:
+          type: object
+          properties:
+            status:
+              type: integer
+              examples:
+              - 401
+              - 404
+  securitySchemes:
+    applicationPassword:
+      type: http
+      scheme: basic
+      description: WordPress Application Passwords. The route index advertises the authorization endpoint at https://www.entergy.com/wp-admin/authorize-application.php. Write routes and privileged read routes require it; the public read routes do not.

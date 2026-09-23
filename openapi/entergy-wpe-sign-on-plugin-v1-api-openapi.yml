@@ -1,0 +1,162 @@
+openapi: 3.2.0
+info:
+  title: Entergy WordPress REST Wpe Sign On Plugin/v1 API
+  version: 1.0.0
+  summary: The public WordPress core REST API exposed by entergy.com.
+  description: The anonymous, machine-readable REST surface published at https://www.entergy.com/wp-json/.
+  contact:
+    name: Entergy Corporation
+    url: https://www.entergy.com/contact
+  x-generated-from: https://www.entergy.com/wp-json/ (WordPress REST API route index, fetched 2026-09-06, HTTP 200)
+  x-provenance-method: derived
+servers:
+- url: https://www.entergy.com/wp-json
+  description: WordPress REST API root on Entergy's corporate site.
+tags:
+- name: wpe_sign_on_plugin/v1
+paths:
+  /wpe_sign_on_plugin/v1:
+    get:
+      operationId: get_wpe_sign_on_plugin_v1
+      summary: GET /wpe_sign_on_plugin/v1
+      description: WordPress REST API route /wpe_sign_on_plugin/v1 in namespace wpe_sign_on_plugin/v1, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - wpe_sign_on_plugin/v1
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+      parameters:
+      - name: namespace
+        in: query
+        required: false
+        schema:
+          type: string
+          default: wpe_sign_on_plugin/v1
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          default: view
+  /wpe_sign_on_plugin/v1/has_logged:
+    post:
+      operationId: post_wpe_sign_on_plugin_v1_has_logged
+      summary: POST /wpe_sign_on_plugin/v1/has_logged
+      description: WordPress REST API route /wpe_sign_on_plugin/v1/has_logged in namespace wpe_sign_on_plugin/v1, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - wpe_sign_on_plugin/v1
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+  /wpe_sign_on_plugin/v1/is_user_logged_in:
+    get:
+      operationId: get_wpe_sign_on_plugin_v1_is_user_logged_in
+      summary: GET /wpe_sign_on_plugin/v1/is_user_logged_in
+      description: WordPress REST API route /wpe_sign_on_plugin/v1/is_user_logged_in in namespace wpe_sign_on_plugin/v1, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - wpe_sign_on_plugin/v1
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+  /wpe_sign_on_plugin/v1/login:
+    get:
+      operationId: get_wpe_sign_on_plugin_v1_login
+      summary: GET /wpe_sign_on_plugin/v1/login
+      description: WordPress REST API route /wpe_sign_on_plugin/v1/login in namespace wpe_sign_on_plugin/v1, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - wpe_sign_on_plugin/v1
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+components:
+  schemas:
+    WPError:
+      type: object
+      description: WordPress REST API error envelope, observed live on this host.
+      properties:
+        code:
+          type: string
+          examples:
+          - rest_forbidden
+          - rest_no_route
+        message:
+          type: string
+          examples:
+          - Sorry, you are not allowed to do that.
+        data:
+          type: object
+          properties:
+            status:
+              type: integer
+              examples:
+              - 401
+              - 404
+  securitySchemes:
+    applicationPassword:
+      type: http
+      scheme: basic
+      description: WordPress Application Passwords. The route index advertises the authorization endpoint at https://www.entergy.com/wp-admin/authorize-application.php. Write routes and privileged read routes require it; the public read routes do not.

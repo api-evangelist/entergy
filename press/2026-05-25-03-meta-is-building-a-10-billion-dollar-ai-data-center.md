@@ -1,7 +1,9 @@
 ---
 title: Meta is building a 10 billion dollar AI data center ...
 url: https://www.facebook.com/Neewtoop/posts/meta-is-building-a-10-billion-dollar-ai-data-center-in-northeast-louisiana-the-s/996636072944252/
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Entergy" press release artificial intelligence'
 position: 3
 source: serpapi-google

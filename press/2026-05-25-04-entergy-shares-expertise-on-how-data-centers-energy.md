@@ -1,7 +1,9 @@
 ---
 title: Entergy shares expertise on how data centers, energy ...
 url: https://www.entergy.com/blog/entergy-shares-expertise-on-how-data-centers-energy-demand-are-shaping-future
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Entergy" press release artificial intelligence'
 position: 4
 source: serpapi-google

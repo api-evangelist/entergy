@@ -1,0 +1,136 @@
+openapi: 3.2.0
+info:
+  title: Entergy WordPress REST Wpe/cache Plugin/v1 API
+  version: 1.0.0
+  summary: The public WordPress core REST API exposed by entergy.com.
+  description: The anonymous, machine-readable REST surface published at https://www.entergy.com/wp-json/.
+  contact:
+    name: Entergy Corporation
+    url: https://www.entergy.com/contact
+  x-generated-from: https://www.entergy.com/wp-json/ (WordPress REST API route index, fetched 2026-09-06, HTTP 200)
+  x-provenance-method: derived
+servers:
+- url: https://www.entergy.com/wp-json
+  description: WordPress REST API root on Entergy's corporate site.
+tags:
+- name: wpe/cache-plugin/v1
+paths:
+  /wpe/cache-plugin/v1:
+    get:
+      operationId: get_wpe_cache_plugin_v1
+      summary: GET /wpe/cache-plugin/v1
+      description: WordPress REST API route /wpe/cache-plugin/v1 in namespace wpe/cache-plugin/v1, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - wpe/cache-plugin/v1
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+      parameters:
+      - name: namespace
+        in: query
+        required: false
+        schema:
+          type: string
+          default: wpe/cache-plugin/v1
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          default: view
+  /wpe/cache-plugin/v1/clear_all_caches:
+    post:
+      operationId: post_wpe_cache_plugin_v1_clear_all_caches
+      summary: POST /wpe/cache-plugin/v1/clear_all_caches
+      description: WordPress REST API route /wpe/cache-plugin/v1/clear_all_caches in namespace wpe/cache-plugin/v1, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - wpe/cache-plugin/v1
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+  /wpe/cache-plugin/v1/rate_limit_status:
+    post:
+      operationId: post_wpe_cache_plugin_v1_rate_limit_status
+      summary: POST /wpe/cache-plugin/v1/rate_limit_status
+      description: WordPress REST API route /wpe/cache-plugin/v1/rate_limit_status in namespace wpe/cache-plugin/v1, as advertised by the live route index at https://www.entergy.com/wp-json/.
+      tags:
+      - wpe/cache-plugin/v1
+      responses:
+        '200':
+          description: Success. Response body shape is defined by the WordPress REST controller for this route; the route index does not describe it, so it is not asserted here.
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: rest_forbidden - authentication required for this route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+        '404':
+          description: rest_no_route - no route matched.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WPError'
+components:
+  schemas:
+    WPError:
+      type: object
+      description: WordPress REST API error envelope, observed live on this host.
+      properties:
+        code:
+          type: string
+          examples:
+          - rest_forbidden
+          - rest_no_route
+        message:
+          type: string
+          examples:
+          - Sorry, you are not allowed to do that.
+        data:
+          type: object
+          properties:
+            status:
+              type: integer
+              examples:
+              - 401
+              - 404
+  securitySchemes:
+    applicationPassword:
+      type: http
+      scheme: basic
+      description: WordPress Application Passwords. The route index advertises the authorization endpoint at https://www.entergy.com/wp-admin/authorize-application.php. Write routes and privileged read routes require it; the public read routes do not.
