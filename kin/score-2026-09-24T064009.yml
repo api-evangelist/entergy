@@ -1,37 +1,35 @@
-# Kin Score artifact — entergy — 2026-08-30T220315
+# Kin Score artifact — entergy — 2026-09-24T064009
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: entergy
-  schema_version: 0.17.2
-  scored_at: '2026-08-30'
-  run_ts: 2026-08-30T220315
-  composite: 2.9
-  band: minimal
+  schema_version: 0.22.0
+  scored_at: '2026-09-24'
+  run_ts: 2026-09-24T064009
+  composite: 26.5
+  band: thin
   facets:
-    discoverability: 40.7
-    contract_quality: 0.0
-    governance: 0.0
+    discoverability: 59.3
+    contract_quality: 15.0
+    contract_governance: 18.2
     operational_transparency: 0.0
-    developer_ergonomics: 2.4
-    commercial_clarity: 0.0
-    contract_governance: 0.0
-    access_clarity: 0.0
+    developer_ergonomics: 30.4
+    access_clarity: 27.6
   agent_readiness:
-    score: 0.0
-    band: human-only
+    score: 21.8
+    band: agent-aware
     dimensions:
-      spec_presence: false
+      spec_presence: true
       agentic_access: false
       reversibility_documented: false
       mcp_server: false
-      auth_clarity: false
+      auth_clarity: bearer
       idempotency: false
-      error_semantics: false
+      error_semantics: documented
       openapi_examples: false
-      rate_limit_signal: false
+      rate_limit_signal: documented
       event_surface_described: false
-      agent_skills: false
+      agent_skills: derived
       well_known_catalog: false
       consent_identity: false
       agent_card: false
@@ -44,5 +42,14 @@ kin_score:
     applies: true
     regime: Energy & Utilities
     regime_id: energy_utilities
-    score: 8.1
+    score: 44.6
     matched_via: tags
+  provenance:
+    mcp: derived
+    skills: derived
+    conformance: first-party
+    contracts:
+      total: 10
+      derived: 10
+      coverage: 100.0
+      callable: 100.0
