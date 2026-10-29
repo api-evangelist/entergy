@@ -1,4 +1,4 @@
-# Entergy (entergy)
+# Entergy
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,38 +66,105 @@
 
 Entergy Corporation is an integrated energy company headquartered in New Orleans, Louisiana, providing electricity to more than 3 million utility customers across Arkansas, Louisiana, Mississippi, and Texas. The company operates power generation, transmission, and distribution infrastructure including nuclear, renewable, and hydroelectric resources. While Entergy does not publish a public developer API portal, it operates customer-facing digital tools (myEntergy account portal, outage map, energy efficiency toolkit) that interact with internal systems via private APIs.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/entergy/refs/heads/main/apis.yml)
+**Areas:** Electricity · Energy · Fortune 500 · Utility · Nuclear · Power Generation · Louisiana · Geospatial
 
-## Scope
+## Entergy on APIs.io
 
-- **Type:** Profile
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Entergy is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/entergy/](https://apis.io/providers/entergy/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (2)
 
-- Electricity
-- Energy
-- Fortune 500
-- Utility
+- [Entergy ArcGIS Server](https://apis.io/apis/entergy/entergy-arcgis-server/) — Entergy's electric-network GIS platform at gis.entergy.com, running Esri ArcGIS Server 10.7.1. The service-info document answers anonymously and declares…
+- [Entergy Website (WordPress REST)](https://apis.io/apis/entergy/entergy-com-website-wordpress-rest/) — The public WordPress REST API (wp-json) of the Entergy website at www.entergy.com: the route index of the site's content management system, catalogued as…
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-21
-- **Modified:** 2026-04-28
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### MCP servers (1)
 
-No public APIs have been documented yet. Entergy operates customer-facing digital tools that interact with internal systems but does not publish a public developer portal. Contributions welcome.
+Model Context Protocol servers that expose the API to agents.
 
-## Common Properties
+- [Entergy MCP server](https://apis.io/servers/entergy/entergy-mcp-server/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Entergy Authentication](https://apis.io/security/entergy/entergy-authentication/)
+- [Entergy Domain Security](https://apis.io/security/entergy/entergy-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Entergy Plans Pricing](https://apis.io/plans/entergy/entergy-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Entergy Rate Limits](https://apis.io/rate-limits/entergy/entergy-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.entergy.com)
-- [CustomerPortal](https://myaccount.entergy.com/)
-- [OutageMap](https://www.entergy.com/outages/)
-- [Careers](https://www.entergy.com/careers/)
+- [Support](https://www.entergy.com/contact)
+- [Blog](https://www.entergy.com/feed/)
+- [Terms of service](https://www.entergy.com/terms)
+- [Privacy policy](https://www.entergy.com/privacy)
 
-## Maintainers
+## API Evangelist rating
 
-- **FN:** Kin Lane
-- **Email:** kin@apievangelist.com
+**Kin Score 26.0** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 58.0 |
+| Contract quality | 24.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 30.4 |
+| Access clarity | 27.6 |
+
+**Agent readiness 21.8** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.5** — Energy & Utilities
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/entergy/](https://apis.io/providers/entergy/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Entergy: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/entergy/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
